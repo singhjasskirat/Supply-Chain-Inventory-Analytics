@@ -1,0 +1,7 @@
+# Python Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+__pycache__/
+
+# Power BI Temp Files
+*.tmp
+*.zip

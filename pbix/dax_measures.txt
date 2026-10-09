@@ -1,0 +1,53 @@
+# All measure formula used in powerbi
+
+
+
+#For Average Order Units
+Avg Order Units = AVERAGE(Transactions[units_sold])
+
+
+
+
+#For Festival Average
+Festival Avg = CALCULATE(AVERAGE(Transactions[units_sold]), Transactions[sales_event] = "Festival")
+
+
+
+
+#For Festival Surge
+Festival Surge % = DIVIDE([Festival Avg] - [Normal Avg], [Normal Avg], 0)
+
+
+
+
+#For Normal Average
+Normal Avg = CALCULATE(AVERAGE(Transactions[units_sold]), Transactions[sales_event] = "Normal")
+
+
+
+
+#For Stockout Rate
+Stockout Rate % = 
+DIVIDE(
+    CALCULATE(
+        COUNTROWS('Transactions'), 
+        'Transactions'[inventory_pressure] = "High"  -- Adjust "High" if your dataset uses 1 or "Yes"
+    ),
+    COUNTROWS('Transactions'),
+    0
+)
+
+
+
+
+
+#For Total Revenue
+Total Revenue = 
+"₹ " & FORMAT(SUM(Transactions[revenue]) / 1E9, "0.00") & "B"
+
+
+
+
+
+#For Total Units
+Total Units = SUM(Transactions[units_sold])
